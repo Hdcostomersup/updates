@@ -59,6 +59,30 @@ while True:
 				print("Error: %s!\n\n" % exception)
 
 		else:
+			ts = time.time()
+
+			sent_body = (
+						  "destiny wasn't open timestamp\n"
+						  +str(ts)+"\n")
+
+			msg = MIMEMultipart()
+			msg['From'] = gmail_user
+			msg['To'] = str(emailToSendTo)
+			msg['Subject'] = "Gods plan destiny wasn't open : " + str(ts)
+			part1 = MIMEText(sent_body, 'plain')
+			msg.attach(part1)
+
+			try:
+				server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+				server.ehlo()
+				server.login(gmail_user, gmail_app_password)
+				server.sendmail(gmail_user, emailToSendTo, msg.as_string())
+				server.close()
+
+				print('Email sent! to the embassy of ' + str(ts))
+			except Exception as exception:
+				print("Error: %s!\n\n" % exception)
+
 			print('No chrome process was running')
 	except Exception as exception:
 		print("Error 1: %s!\n\n" % exception)
