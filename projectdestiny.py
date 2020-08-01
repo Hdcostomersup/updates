@@ -1,13 +1,8 @@
-import requests
-import json
-from enum import Enum
 import smtplib
-import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 import pyscreenshot as ImageGrab
-import imghdr
 import time
 import psutil
 from config import (
@@ -38,7 +33,7 @@ gmail_user = "godsplanabcd@gmail.com"
 while True:
 	try:
 		# Check if any chrome process was running or not.
-		if checkIfProcessRunning('destiny2'):
+		if checkIfProcessRunning('chrome'):
 			ts = time.time()
 			im = ImageGrab.grab()
 			im.save("destiny.png")
@@ -58,7 +53,7 @@ while True:
 				server.sendmail(gmail_user, emailToSendTo, msg.as_string())
 				server.close()
 
-				print('Email sent! to the embassy of ' + str(ts))
+				print('Email sent! to destiny ' + str(ts))
 			except Exception as exception:
 				print("Error: %s!\n\n" % exception)
 
@@ -83,11 +78,11 @@ while True:
 				server.sendmail(gmail_user, emailToSendTo, msg.as_string())
 				server.close()
 
-				print('Email sent! to the embassy of ' + str(ts))
+				print('Email sent! to destiny ' + str(ts))
 			except Exception as exception:
 				print("Error: %s!\n\n" % exception)
 
-			print('No chrome process was running')
+			print('No destiny process was running')
 	except Exception as exception:
 		print("Error 1: %s!\n\n" % exception)
 	time.sleep(60 * 1)
