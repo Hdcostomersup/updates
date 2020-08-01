@@ -85,4 +85,4 @@ while True:
 			print('No destiny process was running')
 	except Exception as exception:
 		print("Error 1: %s!\n\n" % exception)
-	time.sleep(60 * 1)
+	time.sleep(60 * 10)
