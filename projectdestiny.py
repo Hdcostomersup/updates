@@ -33,7 +33,7 @@ gmail_user = "godsplanabcd@gmail.com"
 while True:
 	try:
 		# Check if any chrome process was running or not.
-		if checkIfProcessRunning('chrome'):
+		if checkIfProcessRunning('destiny2'):
 			ts = time.time()
 			im = ImageGrab.grab()
 			im.save("destiny.png")
